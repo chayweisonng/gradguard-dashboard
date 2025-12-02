@@ -86,7 +86,7 @@ import StudentCard from '@/components/StudentCard.vue'
 import StudentModal from '@/components/StudentModal.vue'
 import DeleteModal from '@/components/DeleteModal.vue'
 import { useStudentsStore } from '@/stores/students'
-import { useNotificationStore } from '@/stores/Notification'
+import { useNotificationStore } from '@/stores/notification'
 
 const notificationStore = useNotificationStore()
 

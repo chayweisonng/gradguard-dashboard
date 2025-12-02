@@ -2,7 +2,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
-import { useNotificationStore } from '@/stores/Notification'
+import { useNotificationStore } from '@/stores/notification'
 import { useRouter } from 'vue-router'
 
 const auth = useAuthStore()

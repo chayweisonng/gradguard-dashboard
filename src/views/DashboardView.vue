@@ -167,7 +167,7 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 import Navbar from '@/components/Navbar.vue'
 import { supabase } from '@/lib/supabase'
-import { useNotificationStore } from '@/stores/Notification'
+import { useNotificationStore } from '@/stores/notification'
 
 const notificationStore = useNotificationStore()
 
