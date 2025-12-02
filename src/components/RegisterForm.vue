@@ -118,7 +118,7 @@ async function onSubmit() {
           <!-- Info Box -->
           <div class="rounded-md border border-blue-200 bg-blue-50 p-3">
             <p class="text-sm text-blue-700">
-              💡 Please use a real email address (e.g., Gmail, Outlook, Yahoo)
+              Please use a real email address (e.g., Gmail, Outlook, Yahoo)
             </p>
           </div>
 
