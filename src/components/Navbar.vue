@@ -1,6 +1,33 @@
 <!-- src/components/Navbar.vue -->
 <template>
-  <aside class="w-64 bg-gray-900 text-gray-200 flex flex-col">
+  <!-- Mobile Menu Toggle -->
+  <button 
+    @click="mobileMenuOpen = !mobileMenuOpen"
+    class="lg:hidden fixed top-4 right-4 z-50 p-2 bg-gray-900 text-white rounded-lg shadow-lg"
+  >
+    <svg v-if="!mobileMenuOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" x2="20" y1="12" y2="12"/>
+      <line x1="4" x2="20" y1="6" y2="6"/>
+      <line x1="4" x2="20" y1="18" y2="18"/>
+    </svg>
+    <svg v-else xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="18" x2="6" y1="6" y2="18"/>
+      <line x1="6" x2="18" y1="6" y2="18"/>
+    </svg>
+  </button>
+
+  <!-- Overlay -->
+  <div 
+    v-if="mobileMenuOpen" 
+    @click="mobileMenuOpen = false"
+    class="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-40"
+  ></div>
+
+  <!-- Sidebar -->
+  <aside 
+    class="w-64 bg-gray-900 text-gray-200 flex flex-col fixed lg:static inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out"
+    :class="mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'"
+  >
     <!-- Logo -->
     <div class="p-6 flex items-center gap-3">
       <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center">
@@ -20,6 +47,7 @@
     <nav class="flex-1 px-4 space-y-1">
       <router-link 
         to="/dashboard" 
+        @click="mobileMenuOpen = false"
         class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors cursor-pointer"
         :class="isActive('/dashboard') ? 'bg-indigo-600 text-white shadow-lg' : 'text-gray-400 hover:bg-gray-800 hover:text-white'"
       >
@@ -34,7 +62,8 @@
 
       <router-link 
         to="/student" 
-        class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors  cursor-pointer"
+        @click="mobileMenuOpen = false"
+        class="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors cursor-pointer"
         :class="isActive('/student') ? 'bg-indigo-600 text-white shadow-lg' : 'text-gray-400 hover:bg-gray-800 hover:text-white'"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -50,7 +79,7 @@
     <!-- User Profile -->
     <div class="p-4 border-t border-gray-800">
       <div class="flex items-center gap-3 px-2 py-2 mb-2">
-        <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-sm font-bold">
+        <div class="w-10 h-10 rounded-full bg-indigo-600 flex items-center justify-center text-sm font-bold flex-shrink-0">
           {{ userInitial }}
         </div>
         <div class="flex-1 text-sm overflow-hidden">
@@ -75,13 +104,14 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter, useRoute } from 'vue-router'
 
 const auth = useAuthStore()
 const router = useRouter()
 const route = useRoute()
+const mobileMenuOpen = ref(false)
 
 const userInitial = computed(() => {
   const email = auth.userEmail || 'User'
@@ -93,6 +123,7 @@ const isActive = (path) => {
 }
 
 const handleLogout = async () => {
+  mobileMenuOpen.value = false
   await auth.logout()
   router.push('/login')
 }
