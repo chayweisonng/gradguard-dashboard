@@ -151,7 +151,7 @@
                       </div>
                     </div>
                   </td>
-                  <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-600 hidden md:table-cell">
+                  <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm text-gray-600 hidden md:table-cell capitalize">
                     {{ scan.course }}
                   </td>
                   <td class="px-3 sm:px-6 py-4 whitespace-nowrap text-xs sm:text-sm font-mono text-gray-600 hidden lg:table-cell">
