@@ -147,7 +147,7 @@
                       />
                       <div>
                         <span class="font-medium text-gray-900 text-xs sm:text-sm block">{{ scan.student_name }}</span>
-                        <span class="text-xs text-gray-600 md:hidden block">{{ scan.course }}</span>
+                        <span class="text-xs text-gray-600 md:hidden block capitalize">{{ scan.course }}</span>
                       </div>
                     </div>
                   </td>
